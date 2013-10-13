@@ -22,5 +22,5 @@
             "Tadcka\\AttributesBundle": ""
         }
     },
-    "target-dir": "Tadcka/Attributes"
+    "target-dir": "Tadcka/AttributesBundle"
 }
