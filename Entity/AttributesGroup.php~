@@ -1,0 +1,65 @@
+<?php
+/*
+ * Tadas Gliaubicas <tadcka89@gmail.com>, Github Tadcka.
+ * 13.10.13 17.17
+ * Animals project.
+ */
+
+namespace Tadcka\AttributesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="Tadcka\AttributesBundle\Entity\Repository\AttributesGroupRepository")
+ * @ORM\Table(name="tadcka_attributes_group")
+ */
+class AttributesGroup
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime $createAt
+     *
+     * @ORM\Column(name="create_at", type="datetime", nullable=false)
+     */
+    private $createAt;
+
+    /**
+     * @var \DateTime $updateAt
+     *
+     * @ORM\Column(name="update_at", type="datetime", nullable=false)
+     */
+    private $updateAt;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     */
+    private $slug;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Tadcka\AttributesBundle\Entity\AttributesGroupTranslation[]
+     *
+     * @ORM\OneToMany(targetEntity="\Tadcka\AttributesBundle\Entity\AttributesGroupTranslation", mappedBy="entity", cascade={"persist", "remove"})
+     */
+    private $translations;
+
+    /**
+     *  @var \Doctrine\Common\Collections\ArrayCollection|\Tadcka\AttributesBundle\Entity\Attributes[]
+     *
+     * @ORM\ManyToMany(targetEntity="\Tadcka\AttributesBundle\Entity\Attribute")
+     * @ORM\JoinTable(name="tadcka_attributes_group_attribute",
+     *      joinColumns={@ORM\JoinColumn(name="attributes_group_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="attribute_id", referencedColumnName="id")}
+     * )
+     */
+    protected $attributes;
+}

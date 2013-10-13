@@ -1,0 +1,61 @@
+<?php
+/*
+ * Tadas Gliaubicas <tadcka89@gmail.com>, Github Tadcka.
+ * 13.10.13 16.51
+ * Animals project.
+ */
+
+namespace Tadcka\AttributesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="Tadcka\AttributesBundle\Entity\Repository\AttributeValueRepository")
+ * @ORM\Table(name="tadcka_attribute_value")
+ */
+class AttributeValue
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime $createAt
+     *
+     * @ORM\Column(name="create_at", type="datetime", nullable=false)
+     */
+    private $createAt;
+
+    /**
+     * @var \DateTime $updateAt
+     *
+     * @ORM\Column(name="update_at", type="datetime", nullable=false)
+     */
+    private $updateAt;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     */
+    private $slug;
+
+    /**
+     * @var boolean $visible
+     *
+     * @ORM\Column(name="visible", type="boolean", nullable=false)
+     */
+    private $visible;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|\Tadcka\AttributesBundle\Entity\AttributeValueTranslation[]
+     *
+     * @ORM\OneToMany(targetEntity="\Tadcka\AttributesBundle\Entity\AttributeValueTranslation", mappedBy="entity", cascade={"persist", "remove"})
+     */
+    private $translations;
+}

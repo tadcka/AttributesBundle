@@ -1,0 +1,49 @@
+<?php
+/*
+ * Tadas Gliaubicas <tadcka89@gmail.com>, Github Tadcka.
+ * 13.10.13 16.51
+ * Animals project.
+ */
+
+namespace Tadcka\AttributesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="tadcka_attribute_translation")
+ */
+class AttributeTranslation
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \Tadcka\AttributesBundle\Entity\Attribute $entity
+     *
+     * @ORM\ManyToOne(targetEntity="\Tadcka\AttributesBundle\Entity\Attribute", inversedBy="translations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", onDelete="CASCADE")
+     * })
+     */
+    private $entity;
+
+    /**
+     * @var string $lang
+     *
+     * @ORM\Column(name="lang", type="string", length=31, nullable=false)
+     */
+    private $lang;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     */
+    private $title;
+}
